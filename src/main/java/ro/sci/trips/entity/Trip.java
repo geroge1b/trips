@@ -75,4 +75,13 @@ public class Trip {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public Trip() {
+    }
+
+    public Trip(long id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
 }
