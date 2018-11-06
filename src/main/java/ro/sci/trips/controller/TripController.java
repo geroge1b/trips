@@ -26,14 +26,14 @@ public class TripController {
         //Trip t = new Trip(3, "My third trip", "The third place I've visited");
         //tripService.createTrip(t);
         model.addAttribute("trip", new Trip());
-        return "homePage";
+        return "home";
     }
 
-
-    @RequestMapping(value = "/trip", method = RequestMethod.GET)
-    public String homePage(@ModelAttribute List<Trip> trips, Model model) {
+    @RequestMapping(value = "/trips", method = RequestMethod.GET)
+    public String listTrips(Model model) {
         model.addAttribute("trips", tripService.getAllTrips());
-        return "homePage";
+        return "trips";
     }
+
 
 }
