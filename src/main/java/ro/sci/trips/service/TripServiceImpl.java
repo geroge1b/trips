@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.sci.trips.entity.Trip;
 import ro.sci.trips.repository.TripRepository;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -11,16 +12,22 @@ import java.util.List;
 public class TripServiceImpl implements TripService {
 
     @Autowired
-    private TripRepository tripRepository;
+    TripRepository tripRepository;
 
     @Override
     public Trip createTrip(Trip trip) {
+
         return tripRepository.save(trip);
     }
 
     @Override
     public Trip getTrip(Long id) {
         return tripRepository.findById(id).orElseThrow(() -> new NullPointerException("Not found"));
+    }
+
+    @Override
+    public Trip getTripById(Long id) {
+        return tripRepository.findById(id).get();
     }
 
     @Override
@@ -36,11 +43,17 @@ public class TripServiceImpl implements TripService {
     @Override
     public void deleteTrip(Trip trip) {
         tripRepository.delete(trip);
-
     }
 
     @Override
     public List<Trip> getAllTrips() {
-        return tripRepository.findAll();
+        return (List<Trip>) tripRepository.findAll();
     }
+
+    /*
+        @Override
+        public List<Trip> getAllTrips(int pageNumber, int pageSize) {
+            return tripRepository.findAll(new PageRequest(pageNumber, pageSize)).getContent();
+        }
+    */
 }

@@ -1,7 +1,10 @@
 package ro.sci.trips.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "TRIP")
@@ -19,9 +22,13 @@ public class Trip {
     private String description;
 
     @Column(name = "START_DATE")
+    //@DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
     @Column(name = "END_DATE")
+    //@DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
 
     @Column(name = "LOCATION")
@@ -78,10 +85,20 @@ public class Trip {
 
     public Trip() {
     }
-
+/*
     public Trip(long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
     }
+
+    public Trip(long id, String title, String description, LocalDate startDate, LocalDate endDate, String location) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+    }
+*/
 }

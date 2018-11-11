@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Trips</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Description</th>
+
+            <td>
+                <a href="/tripEdit" th:href="@{/tripEdit}">
+                    <button type="button" class="btn btn-primary btn-md">Add</button>
+                </a>
+            </td>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="trip : ${trips}">
+            <td th:text="${trip.id}"></td>
+            <td th:text="${trip.title}"></td>
+            <td th:text="${trip.startDate}"></td>
+            <td th:text="${trip.endDate}"></td>
+            <td th:text="${trip.description}"></td>
+
+            <td>
+                <a href="/tripEdit/1" th:href="@{/tripEdit/__${trip.id}__}">
+                    <button type="submit" class="btn btn-default btn-md">Edit</button>
+                </a>
+
+                <a href="/tripDelete/1" th:href="@{/tripDelete/__${trip.id}__}">
+                    <button type="reset" class="btn btn-danger btn-md">Delete</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
