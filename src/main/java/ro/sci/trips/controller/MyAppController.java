@@ -29,10 +29,16 @@ public class MyAppController {
     }
 
 
-    @RequestMapping(value = "/trips", method = RequestMethod.GET)
-    public String listTrips(Model model) {
-        model.addAttribute("trips", tripService.getAllTrips());
-        return "tripsList";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String listTrips(@RequestParam(value = "tripId", required = false) Long tripId , Model model) {
+
+        if(tripId != null){
+            model.addAttribute("trips", tripService.getAllTripsById(tripId));
+        }
+        else {
+            model.addAttribute("trips", tripService.getAllTrips());
+        }
+        return "index";
     }
 
     @RequestMapping(value={"/tripEdit","/tripEdit/{id}"}, method = RequestMethod.GET)
@@ -49,90 +55,17 @@ public class MyAppController {
     public String tripEdit(Model model, Trip trip) {
         tripService.createTrip(trip);
         model.addAttribute("trips", tripService.getAllTrips());
-        return "tripsList";
+        return "index";
     }
 
     @RequestMapping(value = "/tripDelete/{id}", method = RequestMethod.GET)
     public String tripDelete(Model model, @PathVariable(required = true, name = "id") Long id) {
         tripService.deleteTrip(id);
         model.addAttribute("trips", tripService.getAllTrips());
-        return "tripsList";
-    }
-/*
-    @RequestMapping(value = "/trips", method = RequestMethod.GET)
-    public ModelAndView list() {
-        ModelAndView model = new ModelAndView("index");
-        List<Trip> tripList = tripService.getAllTrips();
-        model.addObject("tripList", tripList);
-        return model;
-    }
-
-
-    @RequestMapping(value = "/saveTrip/", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("tripForm") Trip trip) {
-        tripService.editTrip(trip);
-        return new ModelAndView("redirect:/");
-    }
-
-    @RequestMapping(value = "/addTrip/", method = RequestMethod.POST)
-    public ModelAndView addTrip() {
-        ModelAndView model = new ModelAndView();
-        Trip trip = new Trip();
-        model.addObject("tripForm", trip);
-        model.setViewName("trip_form");
-        return model;
-    }
-
-
-    @RequestMapping(value = "/editTrip{id}", method = RequestMethod.GET)
-    public ModelAndView editTrip(@PathVariable long id) {
-        ModelAndView model = new ModelAndView();
-        Trip trip = tripService.getTripById(id);
-
-        model.addObject("tripForm", trip);
-        model.setViewName("trip_form");
-        return model;
-    }
-
-
-
-    @RequestMapping(value = "/deleteTrip/{id}", method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable("id") long id){
-        tripService.deleteTrip(id);
-        return new ModelAndView("redirect:/");
-    }
-
-*/
-
-/*
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String listTrips(Model model) {
-        model.addAttribute("trips", tripService.getAllTrips());
         return "index";
     }
 
-    @RequestMapping(value = "trip/new", method = RequestMethod.GET)
-    public String newTrip(Model model) {
-        model.addAttribute("trip", tripService.createTrip(new Trip()));
-        return "trip/tripform";
-    }
 
 
-    @RequestMapping(value = "/trip", method = RequestMethod.GET)
-    public String addPageTrip(@ModelAttribute Trip trip, Model model) {
-        tripService.createTrip(trip);
-        model.addAttribute("trips", tripService.getAllTrips());
-        return "result";
-    }
-
-    @RequestMapping(value={"/sendTrip"},method = RequestMethod.POST)
-    public String selectTrip(Model model, HttpSession session, HttpServletRequest request) {
-
-        String selectedTrip = request.getParameter("id");
-        return "trips";
-    }
-
-*/
 
 }

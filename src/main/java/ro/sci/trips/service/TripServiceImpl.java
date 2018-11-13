@@ -6,6 +6,7 @@ import ro.sci.trips.entity.Trip;
 import ro.sci.trips.repository.TripRepository;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +50,27 @@ public class TripServiceImpl implements TripService {
     public List<Trip> getAllTrips() {
         return (List<Trip>) tripRepository.findAll();
     }
+
+    @Override
+    public List<Trip> getAllTripsById(Long id) {
+        List<Trip> tcList = new ArrayList<>();
+        List<Trip> all = getAllTrips();
+
+        for (Trip t : all) {
+            if (t.getId() == id) {
+                tcList.add(0, t);
+                break;
+            }
+        }
+        for (Trip t : all) {
+            if (t.getId() != (id)) {
+                tcList.add(t);
+            }
+        }
+
+        return tcList;
+    }
+
 
     /*
         @Override

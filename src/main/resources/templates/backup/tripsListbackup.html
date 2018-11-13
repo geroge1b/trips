@@ -15,6 +15,40 @@
 
     <h1>Trips</h1>
 
+    <div class="col-lg-3" th:object="${trips}">
+        <label for="testOrder" text="TRip:">Trip:</label><br>
+        <select class="form-control" id="testOrder" name="testOrder">
+            <option value="">Select Trip</option>
+            <option th:each="trip : ${trips}"
+                    th:value="${trip.title}"
+                    th:text="${trip.title}">
+            </option>
+        </select>
+    </div>
+
+    <form th:action="@{/id}" th:object="${values}" method="get">
+
+        <div th:object="${trips}">
+            <label for="testOrder" text="Trip:">Trip:</label><br>
+            <select  id="testOrder" name="tripId">
+                <option th:each="trip : ${trips}"
+                        th:value="${trip.id}"
+                        th:text="${trip.title}">
+                </option>
+            </select>
+        </div>
+        <tr>
+            <td><input name="submit" type="submit" value="submit" /></td>
+        </tr>
+    </form>
+    <div>
+        <label for="tripImpressions" text="Trip:">Trip:</label><br>
+        <textarea  id="tripImpressions" rows = "6" cols = "70"> [[${trips[0].description}]] </textarea>
+    </div>
+
+
+
+
     <table class="table">
         <thead>
         <tr>

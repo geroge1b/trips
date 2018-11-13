@@ -12,7 +12,7 @@ public interface TripService {
     void deleteTrip(Long id);
     void deleteTrip(Trip trip);
     List<Trip> getAllTrips();
-
+    public List<Trip> getAllTripsById(Long id);
 //    List<Trip> getAllTrips(int pageNumber, int pageSize);
 
 }
