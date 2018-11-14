@@ -41,6 +41,7 @@ public class MyAppController {
         return "index";
     }
 
+
     @RequestMapping(value={"/tripEdit","/tripEdit/{id}"}, method = RequestMethod.GET)
     public String tripEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {
         if (null != id) {
@@ -65,6 +66,13 @@ public class MyAppController {
         return "index";
     }
 
+
+
+    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
+    public String showProfile() {
+
+        return "profile";
+    }
 
 
 
