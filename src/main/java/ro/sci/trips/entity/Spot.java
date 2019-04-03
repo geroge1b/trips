@@ -63,4 +63,7 @@ public class Spot {
     public void setTrip(Trip trip) {
         this.trip = trip;
     }
+
+    public Spot() {
+    }
 }

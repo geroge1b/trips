@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Trips</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<table>
+    <div class="container">
+
+        <h3>New trip details</h3>
+
+        <form class="form-group" action="/tripEdit" th:action="@{/tripEdit}" method="post">
+                <input th:type="hidden" name="id" th:field="${trip.id}"/>
+
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label">Trip Name</label>
+                    <!---input type="text" class="form-control" id="title" th:field="${trip.title}" /--->
+                    <input class="form-control form-control-sm" type="text" id="title" th:field="${trip.title}"/>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="startDate"> Date From </label>
+                    <input type="date" id="startDate" th:field="${trip.startDate}"/>
+                </div>
+                <div class="form-group row">
+                    <label for="endDate">Date To</label>
+                    <input type="date" id="endDate" th:field="${trip.endDate}"/>
+                </div>
+
+                <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label">Impressions</label>
+                    <textarea class="form-control" id="description" th:field="${trip.description}"></textarea>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" th:field="${trip.location}"/>
+                </div>
+
+            <a href="#" th:href="@{/}">
+
+                <button type="submit" class="btn btn-success btn-md">Save</button>
+            </a>
+                <!--button type="reset" class="btn btn btn-md">Reset</button-->
+
+
+        </form>
+
+    </div>
+</table>
+</body>
+</html>
